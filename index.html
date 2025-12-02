@@ -5,22 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>生日快樂！</title>
     <style>
-        /* CSS: 這裡是控制網頁長什麼樣子的 (化妝師) */
+        /* CSS: 設定網頁外觀 */
         body {
             background-color: #fce4ec; /* 背景淡粉色 */
             font-family: 'Microsoft JhengHei', sans-serif; /* 微軟正黑體 */
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh; /* 讓內容垂直置中 */
+            height: 100vh;
             margin: 0;
         }
 
         .card {
             background: white;
             padding: 40px;
-            border-radius: 20px; /* 圓角 */
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* 陰影讓卡片浮起來 */
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             text-align: center;
             max-width: 350px;
             width: 90%;
@@ -28,7 +28,7 @@
         }
 
         .card:hover {
-            transform: scale(1.02); /* 滑鼠移過去會有微微放大的特效 */
+            transform: scale(1.02);
         }
 
         h1 {
@@ -38,24 +38,25 @@
 
         p {
             color: #555;
-            line-height: 1.6;
+            line-height: 1.8; /* 讓行距寬一點比較好讀 */
             font-size: 16px;
+            text-align: left; /* 文字靠左比較像信件 */
         }
 
         .photo-area {
             width: 150px;
             height: 150px;
             background-color: #ddd;
-            border-radius: 50%; /* 圓形照片 */
+            border-radius: 50%;
             margin: 0 auto 20px auto;
-            overflow: hidden; /* 讓照片不跑出圓形外 */
+            overflow: hidden;
             border: 5px solid #f8bbd0;
         }
 
         img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* 保持照片比例 */
+            object-fit: cover;
         }
 
         .btn {
@@ -75,7 +76,7 @@
         }
 
         #secret-message {
-            display: none; /* 一開始隱藏秘密訊息 */
+            display: none;
             margin-top: 20px;
             color: #d81b60;
             font-weight: bold;
@@ -90,38 +91,49 @@
 </head>
 <body>
 
+    <audio id="bgm" src="music.mp3" loop></audio>
+
     <div class="card">
         <div class="photo-area">
             <img src="photo.jpg" alt="女朋友的照片">
         </div>
 
         <h1 id="title">生日快樂！</h1>
+
         <p>
-            親愛的 OO，<br>
-            這是我第一次用寫程式的方式送妳禮物。<br>
-            雖然我還在努力學寫 code，<br>
-            但我對妳的心意是沒有 Bug 的！
+            親愛的 瑀辰，<br> <br>
+            4 月 6 號，迄今已經249天了<br>
+            謝謝妳總是很貼心地幫我洗衣服，<br>
+            有時候宵夜煮給我吃的小東西，都讓我覺得好溫暖。<br>
+            <br>
+            但我知道，我有時候脾氣上來，<br>
+            常常讓妳哭了，對不起。<br>
+            未來的日子，我會盡量最小化XD，<br>
+            生日快樂！<br>
         </p>
 
         <button class="btn" onclick="showSurprise()">點我有驚喜</button>
 
         <div id="secret-message">
-            💖 禮物就在我的背包裡！ 💖
+            💖💖💖
         </div>
     </div>
 
     <script>
-        // JavaScript: 這裡是網頁的邏輯 (大腦)
+        // JavaScript: 控制按鈕行為
         function showSurprise() {
-            // 找到隱藏的訊息並顯示出來
+            // 1. 播放音樂
+            var audio = document.getElementById('bgm');
+            // 如果你覺得太大聲，可以把 0.5 改成 0.3
+            audio.volume = 0.5; 
+            audio.play();
+
+            // 2. 顯示隱藏訊息
             var message = document.getElementById('secret-message');
             message.style.display = 'block';
             
-            // 改變標題文字
-            document.getElementById('title').innerText = "愛妳喔！";
-            
-            // 讓按鈕消失 (可選)
-            // document.querySelector('.btn').style.display = 'none';
+            // 3. 改變標題
+            document.getElementById('title').innerText = "我愛妳！";
         }
     </script>
 </body>
