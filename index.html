@@ -1,1 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生日快樂！</title>
+    <style>
+        /* CSS: 這裡是控制網頁長什麼樣子的 (化妝師) */
+        body {
+            background-color: #fce4ec; /* 背景淡粉色 */
+            font-family: 'Microsoft JhengHei', sans-serif; /* 微軟正黑體 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* 讓內容垂直置中 */
+            margin: 0;
+        }
 
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px; /* 圓角 */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* 陰影讓卡片浮起來 */
+            text-align: center;
+            max-width: 350px;
+            width: 90%;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.02); /* 滑鼠移過去會有微微放大的特效 */
+        }
+
+        h1 {
+            color: #d81b60;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #555;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .photo-area {
+            width: 150px;
+            height: 150px;
+            background-color: #ddd;
+            border-radius: 50%; /* 圓形照片 */
+            margin: 0 auto 20px auto;
+            overflow: hidden; /* 讓照片不跑出圓形外 */
+            border: 5px solid #f8bbd0;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 保持照片比例 */
+        }
+
+        .btn {
+            background-color: #d81b60;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #ad1457;
+        }
+
+        #secret-message {
+            display: none; /* 一開始隱藏秘密訊息 */
+            margin-top: 20px;
+            color: #d81b60;
+            font-weight: bold;
+            animation: fadeIn 1s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="photo-area">
+            <img src="photo.jpg" alt="女朋友的照片">
+        </div>
+
+        <h1 id="title">生日快樂！</h1>
+        <p>
+            親愛的 OO，<br>
+            這是我第一次用寫程式的方式送妳禮物。<br>
+            雖然我還在努力學寫 code，<br>
+            但我對妳的心意是沒有 Bug 的！
+        </p>
+
+        <button class="btn" onclick="showSurprise()">點我有驚喜</button>
+
+        <div id="secret-message">
+            💖 禮物就在我的背包裡！ 💖
+        </div>
+    </div>
+
+    <script>
+        // JavaScript: 這裡是網頁的邏輯 (大腦)
+        function showSurprise() {
+            // 找到隱藏的訊息並顯示出來
+            var message = document.getElementById('secret-message');
+            message.style.display = 'block';
+            
+            // 改變標題文字
+            document.getElementById('title').innerText = "愛妳喔！";
+            
+            // 讓按鈕消失 (可選)
+            // document.querySelector('.btn').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
