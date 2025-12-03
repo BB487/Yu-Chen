@@ -7,7 +7,7 @@
     <style>
         /* --- CSS: 設定網頁外觀 --- */
         body {
-            /* 柔和的粉色漸層背景 */
+            /* 背景：柔和的粉色漸層 */
             background: linear-gradient(to top right, #fad0c4 0%, #ffd1ff 100%);
             font-family: 'Microsoft JhengHei', sans-serif;
             display: flex;
@@ -16,18 +16,19 @@
             min-height: 100vh;
             margin: 0;
             overflow: hidden;
-            position: relative;
+            position: relative; /* 建立定位基準 */
         }
 
-        /* --- 修正後的圓形氣泡特效 --- */
+        /* --- 強制顯示版：動態背景特效 --- */
         .bg-bubbles {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            pointer-events: none;
+            /* 確保它在背景漸層之上，但在卡片之下 */
+            z-index: 1; 
+            pointer-events: none; /* 讓滑鼠可以點穿它 */
         }
 
         .bg-bubbles li {
@@ -36,29 +37,35 @@
             display: block;
             width: 40px;
             height: 40px;
-            /* ★★★ 變成圓形，絕對不會破圖 ★★★ */
-            background-color: rgba(255, 255, 255, 0.3);
-            border-radius: 50%; 
-            bottom: -160px;
-            animation: floatUp 25s infinite;
+            
+            /* ★★★ 關鍵修改：改成明顯的實心粉紅色，保證看得到 ★★★ */
+            background-color: #e91e63; 
+            border-radius: 50%; /* 確保是圓形 */
+            opacity: 0.6; /* 稍微一點點透明感，比較不呆板 */
+            
+            bottom: -160px; /* 從畫面外下方開始 */
+            
+            animation: floatUp 25s infinite; /* 套用飄浮動畫 */
             transition-timing-function: linear;
         }
 
+        /* 設定每一顆的位置、大小和延遲 */
         .bg-bubbles li:nth-child(1) { left: 10%; }
-        .bg-bubbles li:nth-child(2) { left: 20%; width: 80px; height: 80px; animation-delay: 2s; animation-duration: 17s; background-color: rgba(255, 192, 203, 0.4); }
+        .bg-bubbles li:nth-child(2) { left: 20%; width: 80px; height: 80px; animation-delay: 2s; animation-duration: 17s; opacity: 0.4; }
         .bg-bubbles li:nth-child(3) { left: 25%; animation-delay: 4s; }
-        .bg-bubbles li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-duration: 22s; background-color: rgba(255, 255, 255, 0.25); }
-        .bg-bubbles li:nth-child(5) { left: 70%; width: 30px; height: 30px; background-color: rgba(255, 192, 203, 0.3); }
-        .bg-bubbles li:nth-child(6) { left: 80%; width: 90px; height: 90px; animation-delay: 3s; background-color: rgba(255, 255, 255, 0.2); }
+        .bg-bubbles li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-duration: 22s; opacity: 0.5; }
+        .bg-bubbles li:nth-child(5) { left: 70%; width: 30px; height: 30px; }
+        .bg-bubbles li:nth-child(6) { left: 80%; width: 90px; height: 90px; animation-delay: 3s; opacity: 0.3; }
         .bg-bubbles li:nth-child(7) { left: 32%; width: 50px; height: 50px; animation-delay: 7s; }
-        .bg-bubbles li:nth-child(8) { left: 55%; width: 20px; height: 20px; animation-delay: 15s; animation-duration: 40s; background-color: rgba(255, 192, 203, 0.5); }
-        .bg-bubbles li:nth-child(9) { left: 25%; width: 10px; height: 10px; animation-delay: 2s; animation-duration: 40s; background-color: rgba(255, 255, 255, 0.3); }
+        .bg-bubbles li:nth-child(8) { left: 55%; width: 20px; height: 20px; animation-delay: 15s; animation-duration: 40s; }
+        .bg-bubbles li:nth-child(9) { left: 25%; width: 10px; height: 10px; animation-delay: 2s; animation-duration: 40s; }
         .bg-bubbles li:nth-child(10) { left: 90%; width: 70px; height: 70px; animation-delay: 11s; }
 
+        /* 定義飄浮動畫 */
         @keyframes floatUp {
-            0% { transform: translateY(0) translateX(0); opacity: 0.8; }
-            50% { transform: translateX(20px); }
-            100% { transform: translateY(-1000px) translateX(-20px); opacity: 0; }
+            0% { transform: translateY(0) translateX(0); opacity: 0.6; }
+            50% { transform: translateX(20px); } /* 稍微往右飄 */
+            100% { transform: translateY(-1000px) translateX(-20px); opacity: 0; } /* 往上飄並消失 */
         }
 
         /* --- 卡片本體 --- */
@@ -72,7 +79,8 @@
             width: 90%;
             transition: transform 0.3s;
             position: relative;
-            z-index: 10;
+            /* 確保卡片在氣泡上面 */
+            z-index: 10; 
         }
 
         .card:hover { transform: scale(1.02); }
@@ -100,22 +108,15 @@
         </div>
         <h1 id="title">生日快樂！</h1>
         <p>
+            <p>
             親愛的 瑀辰，<br> <br>
-
             4 月 6 號，迄今已經249天了<br>
-
             謝謝妳總是很貼心地幫我洗衣服，<br>
-
             有時候宵夜煮給我吃的小東西，都讓我覺得好溫暖。<br>
-
             <br>
-
             但我知道，我有時候脾氣上來，<br>
-
             常常讓妳哭了，對不起。<br>
-
             未來的日子，我會盡量最小化XD，<br>
-
             生日快樂！<br>
         </p>
         <button class="btn" onclick="showSurprise()">點我有驚喜</button>
