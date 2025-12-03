@@ -5,91 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>生日快樂！</title>
     <style>
-        /* CSS: 設定網頁外觀 */
+        /* --- CSS: 設定網頁外觀 --- */
         body {
-            background-color: #fce4ec; /* 背景淡粉色 */
-            font-family: 'Microsoft JhengHei', sans-serif; /* 微軟正黑體 */
+            /* 改成柔和的粉色漸層背景 */
+            background: linear-gradient(to top right, #fad0c4 0%, #ffd1ff 100%);
+            font-family: 'Microsoft JhengHei', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh; /* 使用 min-height 確保在手機上不會跑版 */
             margin: 0;
+            overflow: hidden; /* 防止捲軸出現 */
+            position: relative; /* 為了讓背景特效定位 */
         }
 
+        /* --- 動態背景特效區 --- */
+        .bg-bubbles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* 確保背景在卡片後面 */
+        }
+
+        .bg-bubbles li {
+            position: absolute;
+            list-style: none;
+            display: block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.3); /* 半透明白色氣泡 */
+            bottom: -160px; /* 從畫面最下方開始 */
+            /* 這裡是用 CSS 畫愛心形狀，如果嫌麻煩也可以改成圓形 border-radius: 50% */
+            clip-path: path('M20 35.3L8.6 24C2.3 17.7 2.3 7.5 8.6 1.2S18.8 1.2 25.1 7.5L20 12.6l-5.1-5.1C8.6 1.2-1.6 1.2-7.9 7.5S-7.9 17.7-1.6 24L20 35.3z');
+            transform: scale(1.5);
+            color: rgba(229, 57, 95, 0.4); /* 愛心的顏色 */
+            background-color: currentColor;
+            
+            animation: square 25s infinite; /* 動畫設定 */
+            transition-timing-function: linear;
+        }
+
+        /* 設定每一顆愛心的位置、大小和延遲時間，讓它看起來自然 */
+        .bg-bubbles li:nth-child(1) { left: 10%; }
+        .bg-bubbles li:nth-child(2) { left: 20%; width: 80px; height: 80px; animation-delay: 2s; animation-duration: 17s; }
+        .bg-bubbles li:nth-child(3) { left: 25%; animation-delay: 4s; }
+        .bg-bubbles li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-duration: 22s; background-color: rgba(255, 255, 255, 0.25); }
+        .bg-bubbles li:nth-child(5) { left: 70%; }
+        .bg-bubbles li:nth-child(6) { left: 80%; width: 120px; height: 120px; animation-delay: 3s; background-color: rgba(255, 255, 255, 0.2); }
+        .bg-bubbles li:nth-child(7) { left: 32%; width: 160px; height: 160px; animation-delay: 7s; }
+        .bg-bubbles li:nth-child(8) { left: 55%; width: 20px; height: 20px; animation-delay: 15s; animation-duration: 40s; }
+        .bg-bubbles li:nth-child(9) { left: 25%; width: 10px; height: 10px; animation-delay: 2s; animation-duration: 40s; background-color: rgba(255, 255, 255, 0.3); }
+        .bg-bubbles li:nth-child(10) { left: 90%; width: 160px; height: 160px; animation-delay: 11s; }
+
+        /* 定義飄浮動畫 */
+        @keyframes square {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-1000px) rotate(600deg); opacity: 0; }
+        }
+
+        /* --- 卡片本體 --- */
         .card {
-            background: white;
+            background: rgba(255, 255, 255, 0.95); /* 稍微透明一點點，讓背景透出來 */
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15); /* 陰影加深一點 */
             text-align: center;
             max-width: 350px;
             width: 90%;
             transition: transform 0.3s;
+            position: relative; /* 確保卡片在背景上方 */
+            z-index: 10;
         }
-
-        .card:hover {
-            transform: scale(1.02);
-        }
-
-        h1 {
-            color: #d81b60;
-            margin-bottom: 10px;
-        }
-
-        p {
-            color: #555;
-            line-height: 1.8; /* 讓行距寬一點比較好讀 */
-            font-size: 16px;
-            text-align: left; /* 文字靠左比較像信件 */
-        }
-
-        .photo-area {
-            width: 150px;
-            height: 150px;
-            background-color: #ddd;
-            border-radius: 50%;
-            margin: 0 auto 20px auto;
-            overflow: hidden;
-            border: 5px solid #f8bbd0;
-        }
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .btn {
-            background-color: #d81b60;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: background 0.3s;
-        }
-
-        .btn:hover {
-            background-color: #ad1457;
-        }
-
-        #secret-message {
-            display: none;
-            margin-top: 20px;
-            color: #d81b60;
-            font-weight: bold;
-            animation: fadeIn 1s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        
+        /* ... (以下是原本的 CSS，沒有變動) ... */
+        .card:hover { transform: scale(1.02); }
+        h1 { color: #d81b60; margin-bottom: 10px; }
+        p { color: #555; line-height: 1.8; font-size: 16px; text-align: left; }
+        .photo-area { width: 150px; height: 150px; background-color: #ddd; border-radius: 50%; margin: 0 auto 20px auto; overflow: hidden; border: 5px solid #f8bbd0; }
+        img { width: 100%; height: 100%; object-fit: cover; }
+        .btn { background-color: #d81b60; color: white; border: none; padding: 10px 20px; border-radius: 30px; font-size: 16px; cursor: pointer; margin-top: 20px; transition: background 0.3s; }
+        .btn:hover { background-color: #ad1457; }
+        #secret-message { display: none; margin-top: 20px; color: #d81b60; font-weight: bold; animation: fadeIn 1s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
+
+    <ul class="bg-bubbles">
+        <li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li>
+    </ul>
 
     <audio id="bgm" src="music.mp3" loop></audio>
 
@@ -119,22 +126,17 @@
         </div>
     </div>
 
-    <script>
+   <script>
         // JavaScript: 控制按鈕行為
         function showSurprise() {
-            // 1. 播放音樂
             var audio = document.getElementById('bgm');
-            // 如果你覺得太大聲，可以把 0.5 改成 0.3
             audio.volume = 0.5; 
             audio.play();
-
-            // 2. 顯示隱藏訊息
             var message = document.getElementById('secret-message');
             message.style.display = 'block';
-            
-            // 3. 改變標題
             document.getElementById('title').innerText = "我愛妳！";
         }
     </script>
 </body>
 </html>
+
