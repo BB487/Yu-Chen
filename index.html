@@ -15,11 +15,11 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            overflow: hidden; /* 防止捲軸出現 */
+            overflow: hidden;
             position: relative;
         }
 
-        /* --- 動態背景特效區 (修正版：浪漫氣泡) --- */
+        /* --- 修正後的圓形氣泡特效 --- */
         .bg-bubbles {
             position: absolute;
             top: 0;
@@ -27,7 +27,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            pointer-events: none; /* 確保不會擋到滑鼠點擊 */
+            pointer-events: none;
         }
 
         .bg-bubbles li {
@@ -36,20 +36,16 @@
             display: block;
             width: 40px;
             height: 40px;
-            /* 改成單純的圓形氣泡，最穩定不會破圖 */
-            background-color: rgba(255, 255, 255, 0.3); /* 半透明白色 */
-            border-radius: 50%; /* 變成圓形 */
+            /* ★★★ 變成圓形，絕對不會破圖 ★★★ */
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%; 
             bottom: -160px;
-            
-            /* 移除原本導致破圖的 clip-path */
-            
-            animation: floatUp 25s infinite; /* 套用飄浮動畫 */
+            animation: floatUp 25s infinite;
             transition-timing-function: linear;
         }
 
-        /* 設定每一顆氣泡的位置、大小、透明度和延遲時間，製造層次感 */
         .bg-bubbles li:nth-child(1) { left: 10%; }
-        .bg-bubbles li:nth-child(2) { left: 20%; width: 80px; height: 80px; animation-delay: 2s; animation-duration: 17s; background-color: rgba(255, 192, 203, 0.4); /* 偶爾穿插粉色氣泡 */ }
+        .bg-bubbles li:nth-child(2) { left: 20%; width: 80px; height: 80px; animation-delay: 2s; animation-duration: 17s; background-color: rgba(255, 192, 203, 0.4); }
         .bg-bubbles li:nth-child(3) { left: 25%; animation-delay: 4s; }
         .bg-bubbles li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-duration: 22s; background-color: rgba(255, 255, 255, 0.25); }
         .bg-bubbles li:nth-child(5) { left: 70%; width: 30px; height: 30px; background-color: rgba(255, 192, 203, 0.3); }
@@ -59,11 +55,10 @@
         .bg-bubbles li:nth-child(9) { left: 25%; width: 10px; height: 10px; animation-delay: 2s; animation-duration: 40s; background-color: rgba(255, 255, 255, 0.3); }
         .bg-bubbles li:nth-child(10) { left: 90%; width: 70px; height: 70px; animation-delay: 11s; }
 
-        /* 定義飄浮動畫 (加上一點點左右搖擺) */
         @keyframes floatUp {
             0% { transform: translateY(0) translateX(0); opacity: 0.8; }
-            50% { transform: translateX(20px); } /* 中途稍微往右飄 */
-            100% { transform: translateY(-1000px) translateX(-20px); opacity: 0; } /* 最後往左上方消失 */
+            50% { transform: translateX(20px); }
+            100% { transform: translateY(-1000px) translateX(-20px); opacity: 0; }
         }
 
         /* --- 卡片本體 --- */
@@ -92,7 +87,6 @@
     </style>
 </head>
 <body>
-
     <ul class="bg-bubbles">
         <li></li><li></li><li></li><li></li><li></li>
         <li></li><li></li><li></li><li></li><li></li>
@@ -104,30 +98,33 @@
         <div class="photo-area">
             <img src="photo.jpg" alt="女朋友的照片">
         </div>
-
         <h1 id="title">生日快樂！</h1>
-        
         <p>
             親愛的 瑀辰，<br> <br>
+
             4 月 6 號，迄今已經249天了<br>
+
             謝謝妳總是很貼心地幫我洗衣服，<br>
+
             有時候宵夜煮給我吃的小東西，都讓我覺得好溫暖。<br>
+
             <br>
+
             但我知道，我有時候脾氣上來，<br>
+
             常常讓妳哭了，對不起。<br>
+
             未來的日子，我會盡量最小化XD，<br>
+
             生日快樂！<br>
         </p>
-
         <button class="btn" onclick="showSurprise()">點我有驚喜</button>
-
         <div id="secret-message">
-            💖💖💖
+            💖 💖 💖
         </div>
     </div>
 
-<script>
-        // JavaScript: 控制按鈕行為
+    <script>
         function showSurprise() {
             var audio = document.getElementById('bgm');
             audio.volume = 0.5; 
